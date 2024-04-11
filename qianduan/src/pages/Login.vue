@@ -7,7 +7,7 @@
     </div>
     <div class="input-group">
       <label for="password">Password:</label>
-      <input type="password" v-model="password" id="password" required>
+      <input v-model="password" id="password" required>
     </div>
     <el-radio-group v-model="usertype">
         <el-radio value="admin" size="large">Admin</el-radio>
