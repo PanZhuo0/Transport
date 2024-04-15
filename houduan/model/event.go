@@ -6,5 +6,5 @@ type Event struct {
 	EventType   string `json:"eventtype"`
 	Timestamp   string `json:"timestamp"`
 	Description string `json:"description"`
-	RoadID      int    `json:"roadid"`
+	RoadName    string `json:"roadname"`
 }

@@ -1,22 +1,27 @@
-import api from "@/api"
+import { ElMessage } from "element-plus"
 import { defineStore } from "pinia"
-import { watch } from "vue"
 
 export const useUser = defineStore('user',{
     state(){
         return{
             // 登录状态
-                name:'John Doe',
-                isLogin:true,
-                userType:'admin',
+                isLogin:false,
+                username:'',
+                userType:'',
+                realname:'',
+                uuid:'',
+                createat:'',
+                password:'',
+                email:'',
         }
     },
     actions:{
         // 退出动作
         exit(){
-            this.name=''
-            this.isLogin=false
-            this.userType='user'
+            ElMessage.warning("已退出")
+            this.$reset()
+            // 把localstore保存的数据删除
+            localStorage.removeItem("auth")
         },
     }
 })

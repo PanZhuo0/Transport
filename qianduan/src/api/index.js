@@ -1,13 +1,88 @@
 // 使用到路径
 import instance from "@/utils/request";
 import base from "./path";
-import { useUser } from "@/store";
-import router from "@/router/index"
 
 const api = {
+    updateUser(data){
+        return instance({
+            method:"post",
+            url:base.baseUrl+'/updateUser',
+            data:data
+        })
+    },
+    addEvent(data){
+        return instance({
+            method:'post',
+            url:base.baseUrl+'/addEvent',
+            data:data
+        })
+    },
+    deleteEvent(data){
+        return instance({
+            method:'post',
+            url:base.baseUrl+'/deleteEvent',
+            data:data
+        })
+    },
+    addVioToDB(data){
+        return instance({
+            method:"post",
+            url:base.baseUrl+'/addVio',
+            data:data,
+        })
+    },
+    insertTraffic(data){
+        return instance({
+            method:"post",
+            url:base.baseUrl+'/insertTraffic',
+            data:data
+        })
+    },
+    cull(){
+        return instance({
+            method:"get",
+            url:base.baseUrl+'/cull',
+        })
+    },
+
+    deleteTraffic(data){
+        return instance({
+            method:"post",
+            url:base.baseUrl+'/deleteTraffic',
+            data:data
+        })
+    },
+    deleteVio(data){
+        return instance({
+            method:"post",
+            url:base.baseUrl+'/deleteVio',
+            data:data
+        })
+    },
+
+    deleteUser(data){
+        return instance({
+            method:"post",
+            url:base.baseUrl+'/deleteUser',
+            data:data,
+        })
+    },
+    getUsers(){
+        return instance({
+            method:'get',
+            url:base.baseUrl+'/getUsers',
+        })
+    },
+    uploadEvent(data){
+        return instance({
+            method:'post',
+            url:base.baseUrl+'/uploadEvent',
+            data:data,
+        })
+    },
     // 就是把所有请求封装到api中,发送任何请求直接api.function 就行
     login(usn, psw, ust) {
-        instance({
+        return instance({
             method: "post",
             url: base.baseUrl + "/login",
             data: {
@@ -16,23 +91,15 @@ const api = {
                 password: psw.value,
                 usertype: ust.value,
             }
-        }).then(
-            // 如果返回的json数据是成功就跳转,否则弹窗账户/密码错误
-            res => {
-                if (res.data.result === "true") {
-                    // 跳转页面到Home,并且记录登录状态
-                    // 怎么跳转页面呢?
-                    // 记录登录状态
-                    const user = useUser()
-                    user.isLogin = true
-                    user.name = usn.value
-                    user.userType = ust.value
-                    router.push({ path: "/home" })
-                } else {
-                    alert("账户/密码/用户类型错误!")
-                }
-            }
-        )
+        })
+    },
+
+    getRegister(data) {
+        return instance({
+            method: "post",
+            url: base.baseUrl + '/register',
+            data: data,
+        })
     },
 
     getRoads(roads) {
@@ -48,16 +115,16 @@ const api = {
         instance({
             method: "get",
             url: base.baseUrl + '/getEvents',
-        }).then(res=> {
+        }).then(res => {
             // e是一个ref对象
             e.value = res.data.data
         })
     },
 
-    getEventsData(){
+    getEventsData() {
         return instance({
-            method:"get",
-            url:base.baseUrl+'/getEvents',
+            method: "get",
+            url: base.baseUrl + '/getEvents',
         })
     },
 
@@ -71,23 +138,48 @@ const api = {
             }).then((res) => {
                 info.value = res.data.data
             })
-        }else{
+        } else {
             // 用户类型是user
             instance({
-                method:'post',
-                url:base.baseUrl+'/getVehiclesByName',
+                method: 'post',
+                url: base.baseUrl + '/getVehiclesByName',
                 // 把用户传递过去
-                data:{"username":user.name,"usertype":user.userType},
-            }).then((res)=>{
-                info.value=res.data.data
+                data: { "username": user.name, "usertype": user.userType },
+            }).then((res) => {
+                info.value = res.data.data
             })
         }
 
     },
 
-    getViolations(){
-        return instance({method:"get",url:base.baseUrl+'/getViolations'})
-    }
+    getViolations() {
+        return instance({ method: "get", url: base.baseUrl + '/getViolations' })
+    },
+    
+    getTraffics(){
+        return instance({
+            method:"get",
+            url:base.baseUrl+'/getTraffics'
+        })
+    },
+    getTraffic1h(){
+        return instance({
+            method:'get',
+            url:base.baseUrl+'/getTraffics1h'
+        })
+    },
+    getTraffic30min(){
+        return instance({
+            method:'get',
+            url:base.baseUrl+'/getTraffics30min'
+        })
+    },
+    getTraffic15min(){
+        return instance({
+            method:'get',
+            url:base.baseUrl+'/getTraffics15min'
+        })
+    },
 }
 
 // 暴露api

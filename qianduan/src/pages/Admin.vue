@@ -1,21 +1,18 @@
 <template>
     <div class="common-layout">
         <el-container class="container">
-            <el-header>
-                <h3>你好,{{ user.name }}</h3>
+            <el-header class="header">
+                <h3>你好,管理员:{{ user.username }}</h3>
                 <el-button type="danger" @click="Exit">退出</el-button>
             </el-header>
             <el-container>
                 <el-aside width="200px" class="aside">
-                    <el-menu :default-active="activeIndex" class="el-menu-demo" background-color="#545c64"
+                    <el-menu :default-active="activeIndex" class="el-menu-demo menu" background-color="#545c64"
                         text-color="#fff" active-text-color="#ffd04b" @select="" router :unique-opened='true'>
-                        <el-menu-item index="/home/road">道路信息查询</el-menu-item>
-                        <el-menu-item index="/home/event">交通事件查询</el-menu-item>
-                        <el-menu-item index="/home/vehicle">车辆信息查询</el-menu-item>
-                        <el-menu-item index="/home/vio">交通违章查询</el-menu-item>
-                        <el-menu-item v-if="user.userType==='admin'" index="/home/vioManager">交通违章管理</el-menu-item>
-                        <el-menu-item v-if="user.userType==='admin'" index="/home/eventManager">交通事件管理</el-menu-item>
-                        <el-menu-item v-if="user.userType==='admin'" index="/home/lightManager">交通灯管理</el-menu-item>
+                        <el-menu-item v-if="user.userType==='admin'" index="/admin/vio">交通违章管理</el-menu-item>
+                        <el-menu-item v-if="user.userType==='admin'" index="/admin/event">交通事件管理</el-menu-item>
+                        <el-menu-item v-if="user.userType==='admin'" index="/admin/traffic">实时交通管理</el-menu-item>
+                        <el-menu-item v-if="user.userType==='admin'" index="/admin/user">用户管理</el-menu-item>
                     </el-menu>
                 </el-aside>
                 <el-main>
@@ -26,7 +23,7 @@
     </div>
 </template>
 
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="Admin">
 import router from '@/router';
 import { useUser } from '@/store';
 import { onMounted, ref, } from 'vue';
@@ -51,6 +48,21 @@ onMounted(()=>{
 }
 
 .aside {
-    height: fit-content;
+    height: 100%;
+}
+.header{
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 20px;
+    background-color: #4b0a0a;
+}
+.menu{
+    height: 100%;
+}
+
+el-main{
+    height: 100%;
 }
 </style>

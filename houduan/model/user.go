@@ -4,9 +4,11 @@ package model
 
 // Users表
 type User struct {
-	UserID   int    `json:"userid"`
+	UserID   string `json:"userid"`
 	Username string `json:"username"`
 	Password string `json:"password"`
 	Email    string `json:"email"`
 	UserType string `json:"usertype"`
+	RealName string `json:"realname"`
+	CreateAt string `json:"createat"`
 }

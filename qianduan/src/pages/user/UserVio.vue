@@ -1,6 +1,6 @@
 <template>
-  <el-table :data="filterViolationData" style="width: 100%" height="1000px">
-    <el-table-column label="ID" prop="id" />
+  <el-table :data="filterViolationData" style="width: 100%" height="88vh">
+    <!-- <el-table-column label="ID" prop="id" /> -->
     <el-table-column label="姓名" prop="name" />
     <el-table-column label="车牌" prop="licenseplate" />
     <el-table-column label="违法时间(UTC+8)" prop="violation_time" />
